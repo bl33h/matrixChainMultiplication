@@ -12,7 +12,7 @@ def MatrixChainOrder(p, n):
     # to multiply the chain of matrices from i to j. The table is filled with 0s initially
     dp = [[0 for x in range(n)] for x in range(n)]
     
-    # cost is zero when multiplying one matrix. This is the base case.
+    # cost is zero when multiplying one matrix (base case)
     for i in range(1, n):
         dp[i][i] = 0
     
@@ -29,7 +29,7 @@ def MatrixChainOrder(p, n):
                 # calculate cost of splitting at k, including the cost of multiplying the two resulting chains
                 q = dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j]
                 
-                # update dp[i][j] if a lower cost is found.
+                # update dp[i][j] if a lower cost is found
                 if q < dp[i][j]:
                     dp[i][j] = q
     
