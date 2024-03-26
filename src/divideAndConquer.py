@@ -14,15 +14,18 @@ def MatrixChainOrderRecursive(p, i, j, dp):
         return 0
     
     # if the solution for this subproblem has already been calculated, return it
+    # where the results of expensive function calls and reuse the results are stored (memoization)
     if dp[i][j] != sys.maxsize:
         return dp[i][j]
     
+    # --- DIVIDE ---
     # recursively find the minimum multiplication cost by dividing the problem into smaller subproblems and trying all possible places to split the chain
     for k in range(i, j):
-        count = (MatrixChainOrderRecursive(p, i, k, dp) +
-                 MatrixChainOrderRecursive(p, k+1, j, dp) +
-                 p[i-1] * p[k] * p[j])
-        
+        count = (MatrixChainOrderRecursive(p, i, k, dp) +  # cost of multiplying matrices from i to k
+                 MatrixChainOrderRecursive(p, k+1, j, dp) +  # cost of multiplying matrices from k+1 to j
+                 p[i-1] * p[k] * p[j])  # cost of multiplying the two resulting matrices
+    
+        # --- COMBINE AND CONQUER ---
         # update dp[i][j] with the minimum cost found so far
         if count < dp[i][j]:
             dp[i][j] = count
@@ -31,7 +34,7 @@ def MatrixChainOrderRecursive(p, i, j, dp):
     return dp[i][j]
 
 def MatrixChainOrderDnC(p, n):
-    # initialize the DP table with sys.maxsize indicating that the minimum cost has not been calculated yet [memoization]
+    # initialize the DP table with sys.maxsize indicating that the minimum cost has not been calculated yet
     dp = [[sys.maxsize for i in range(n)] for j in range(n)]
     
     # start the recursive process from the first matrix to the last
