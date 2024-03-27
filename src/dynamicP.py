@@ -4,7 +4,8 @@
 #Version: I
 #Creation: 26/03/2024
 #Last modification: 26/03/2024
-# Reference: https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
+# References: https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/
+# https://medium.com/@hichetanmore/matrix-chain-multiplication-using-dynamic-programming-22a137df955f
 
 def MatrixChainOrder(p, n):
     # initialize a 2D table to store the minimum cost of matrix multiplication
